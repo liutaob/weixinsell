@@ -4,7 +4,7 @@
 
 - 功能展示
 
-![买](images\p3.png)
+![买](images/p3.png)
 
 ![功能展示](images\p4.png)
 
