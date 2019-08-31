@@ -6,20 +6,22 @@
 
 ![买](images/p3.png)
 
-![功能展示](images\p4.png)
+![功能展示](images/p4.png)
 
 - 软件版本
 
-![tech](images\p5.png)
+![tech](images/p5.png)
 
 ## 项目设计
 
 ### 技术要点
 
-- 前后端分离![tech](images\p6.png)
-- 相关技术![tech](images\p7.png)![tech](images\p8.png)
-
-​                    ![tech](images\p9.png)
+- 前后端分离
+![tech](images/p6.png)
+- 相关技术
+![tech](images/p7.png)
+![tech](images/p8.png)
+![tech](images/p9.png)
 
 ### 角色划分
 
@@ -30,23 +32,23 @@
 
 - 功能分析
 
-![module](images\analy.png)
+![module](images/analy.png)
 
 - 关系图
 
-![p0](images\p0.png)
+![p0](images/p0.png)
 
 
 
 ### 部署架构
 
-![p1](images\p1.png)
+![p1](images/p1.png)
 
 ### 数据库设计
 
 - 数据库表关系
 
-  ![p2](images\p2.png)
+![p2](images/p2.png)
 
 - 数据库表设计
 
