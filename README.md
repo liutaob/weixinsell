@@ -140,7 +140,7 @@ create table `seller_info` (
 
 ## 开发环境搭建
 
-[环境文档](VM.md)
+[环境文档](ENV.md)
 
 
 
