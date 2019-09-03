@@ -1,3 +1,7 @@
+/*
+ * Copyright 2019 Guangdong Etone Technology Co.,Ltd.
+ * All rights reserved.
+ */
 package com.jxust.sell.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
@@ -15,7 +19,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Druid配置
+ * Druid数据源配置
+ *
+ * @author <a href="mailto:maxid@qq.com">LiuTao</a>
+ * @since $$Id$$
  */
 @Configuration
 public class DruidConfig {

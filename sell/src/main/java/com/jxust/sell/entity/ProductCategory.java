@@ -5,6 +5,9 @@
 package com.jxust.sell.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
@@ -13,14 +16,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
- * 一句简洁的说明
+ * 商品类目
  *
  * @author <a href="mailto:maxid@qq.com">LiuTao</a>
  * @since $$Id$$
  */
 @Entity
 @DynamicUpdate//自动更新
-@Data
+@Data//包含setter、getter、hashcode、equal、toString方法 如只需部分 @Getter @EqualsAndHashCode
+@NoArgsConstructor//替代无参构造
+@Accessors(chain = true)//setter返回对象 setXX 方法名是set/get+属性名
+//@Accessors(flue = true)//setter返回对象xx（xx） getter xx 方法名是属性名
+//@Accessors(prefix = "p")//忽略p 如pid，根据id去生成
 public class ProductCategory {
 
     /**
@@ -50,8 +57,9 @@ public class ProductCategory {
 //     */
 //    private Date updateTime;
 
-    public ProductCategory() {
-    }
+    //Spring底层创建bean
+//    public ProductCategory() {
+//    }
 
     public ProductCategory(String categoryName, Integer categoryType) {
         this.categoryName = categoryName;
