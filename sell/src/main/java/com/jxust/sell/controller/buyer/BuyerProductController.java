@@ -44,7 +44,6 @@ public class BuyerProductController {
     @GetMapping("/list")
     @Cacheable(cacheNames = "product") // 缓存,product:list
     public ResultVO list() {
-        // TODO 缓存配置：改用redisTemplate、管理器、序列化等
         // 查询所有的上架商品
         List<ProductInfo> productInfoList = productService.findUpAll();
         // 精简方法(java8，一次性查询商品类目,map映射中仅仅提取商品的类目)  避免在循环中每次都查商品数据库

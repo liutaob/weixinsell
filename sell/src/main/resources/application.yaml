@@ -1,31 +1,58 @@
 spring:
+  #1，druid jar包 +  DruidConfig方式配置druid的其他属性、过滤、监控等
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://49.235.79.220:3306/sell?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+#    username: root
+#    password: Liu123456!
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    initialSize: 10
+#    minIdle: 5
+#    maxActive: 20
+#    maxWait: 60000
+#    timeBetweenEvictionRunsMillis: 60000
+#    minEvictableIdleTimeMillis: 300000
+#    validationQuery: SELECT 1 FROM DUAL
+#    testWhileIdle: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    poolPreparedStatements: true
+#    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+#    filters: stat,wall,log4j
+#    maxPoolPreparedStatementPerConnectionSize: 20
+#    useGlobalDataSourceStat: true
+#    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  #2，druid-starter方式 所有druid属性自动生效 配置文件提供了配置监控、过滤、多数据源等
+  #详细配置参考       https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
+  #监控地址           http://localhost:8080/sell/druid
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://49.235.79.220:3306/sell?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     username: root
     password: Liu123456!
-    type: com.alibaba.druid.pool.DruidDataSource
-    initialSize: 5
-    minIdle: 5
-    maxActive: 20
-    maxWait: 60000
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1 FROM DUAL
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    poolPreparedStatements: true
-    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-    filters: stat,wall,log4j
-    maxPoolPreparedStatementPerConnectionSize: 20
-    useGlobalDataSourceStat: true
-    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      initial-size: 23
+      max-active: 50
+      filters: stat,wall,log4j
+      #web监控的filter
+      web-stat-filter:
+        exclusions: "*.js,*.css,/druid/*"
+        url-pattern: "/*"
+      # StatViewServlet配
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: 123456
+        allow:
+        deny: "192.168.25.135"
   jpa:
     show-sql: true
+    hibernate:
+      ddl-auto: update
   redis:
     host: 49.235.79.220
     password: 123456
+
 server:
   servlet:
     context-path: /sell
