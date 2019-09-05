@@ -33,10 +33,10 @@ spring:
     druid:
       initial-size: 23
       max-active: 50
-      filters: stat,wall,log4j
+      filters: stat,wall,log4j,logback
       #web监控的filter
       web-stat-filter:
-        exclusions: "*.js,*.css,/druid/*"
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
         url-pattern: "/*"
       # StatViewServlet配
       stat-view-servlet:
@@ -45,6 +45,7 @@ spring:
         login-password: 123456
         allow:
         deny: "192.168.25.135"
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
   jpa:
     show-sql: true
     hibernate:

@@ -56,6 +56,12 @@ public class ProductInfoRepositoryTest {
         Assert.assertNotNull(result);
     }
 
+    @Test
+    public void findProductInfoByProductId() {
+        ProductInfo info = repository.findProductInfoByProductId("123456");
+        Assert.assertEquals(info.getProductId(), "123456");
+    }
+
     /**
      * 根据商品状态查找商品集合
      *
@@ -88,9 +94,6 @@ public class ProductInfoRepositoryTest {
     }
 
 
-
-
-
     /**
      * 插入商品对象 JQPL本地sql方式 实体不支持
      */
@@ -106,7 +109,8 @@ public class ProductInfoRepositoryTest {
         productInfo.setProductIcon("http://111x.jpg");
 //        productInfo.setProductStatus(0); //默认就是0
         productInfo.setCategoryType(10);
-        repository.insertProduct(productInfo);
+        int i = repository.insertProduct(productInfo);
+        Assert.assertEquals(1, i);
     }
 
     /**
@@ -123,9 +127,10 @@ public class ProductInfoRepositoryTest {
         productInfo.setProductDescription("居家旅行，杀人必备");
         productInfo.setProductIcon("http://111x.jpg");
         productInfo.setCategoryType(10);
-        repository.insertProductByString(productInfo.getProductId(),productInfo.getProductName(),productInfo.getProductPrice(),productInfo.getProductStock(),
-                productInfo.getProductDescription(),productInfo.getProductIcon(),productInfo.getCategoryType());
+        repository.insertProductByString(productInfo.getProductId(), productInfo.getProductName(), productInfo.getProductPrice(), productInfo.getProductStock(),
+                productInfo.getProductDescription(), productInfo.getProductIcon(), productInfo.getCategoryType());
     }
+
     /**
      * 插入商品Map作参数 JQPL本地sql方式 实体不支持 不推荐
      */
@@ -143,13 +148,13 @@ public class ProductInfoRepositoryTest {
         productInfo.setCategoryType(10);
 
         ConcurrentMap<String, Object> map = Maps.newConcurrentMap();
-        map.put("productId",productInfo.getProductId());
-        map.put("productName",productInfo.getProductName());
-        map.put("productPrice",productInfo.getProductPrice());
-        map.put("productStock",productInfo.getProductStock());
-        map.put("productDescription",productInfo.getProductDescription());
-        map.put("productIcon",productInfo.getProductIcon());
-        map.put("categoryType",productInfo.getCategoryType());
+        map.put("productId", productInfo.getProductId());
+        map.put("productName", productInfo.getProductName());
+        map.put("productPrice", productInfo.getProductPrice());
+        map.put("productStock", productInfo.getProductStock());
+        map.put("productDescription", productInfo.getProductDescription());
+        map.put("productIcon", productInfo.getProductIcon());
+        map.put("categoryType", productInfo.getCategoryType());
 
         Object o = map.get("productId");
         System.out.println(o instanceof String);
@@ -157,12 +162,9 @@ public class ProductInfoRepositoryTest {
         System.out.println(o1 instanceof BigDecimal);
         Object o2 = map.get("categoryType");
         System.out.println(o2 instanceof Integer);
-
         int i = repository.insertProductByMap(map);
-        Assert.assertEquals(1,i);
+        Assert.assertEquals(1, i);
     }
-
-
 
 
     /**
@@ -173,8 +175,9 @@ public class ProductInfoRepositoryTest {
     @Test
     @Transactional//调用删改必须加事务，回滚
     public void deleteProductById() throws Exception {
-        int i = repository.deleteProductById("123460");
+        int i = repository.deleteProductById("123456");
         Assert.assertEquals(1, i);
+//        repository.deleteAll(Arrays.asList(new ProductInfo().setProductId("123456"),new ProductInfo().setProductId("123457")));
     }
 
 
@@ -218,7 +221,7 @@ public class ProductInfoRepositoryTest {
     @javax.transaction.Transactional//两种注解都可
     public void updateProductStatus() {
         //将123460号商品下架
-        int i = repository.updateProductStatus(ProductStatusEnum.DOWN.getCode(), "123460");
+        int i = repository.updateProductStatus(ProductStatusEnum.DOWN.getCode(), "123456");
         Assert.assertNotEquals(0, i);
     }
 }

@@ -11,7 +11,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
+import java.math.BigInteger;
 import java.sql.SQLException;
+import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,10 +30,11 @@ public class SellApplicationTests {
 
     /**
      * 测试从容器中获取bean
+     *
      * @throws SQLException
      */
     @Test
-    public void contextLoads() throws Exception{
+    public void contextLoads() throws Exception {
         Object o = context.getBean(CategoryService.class);
         System.out.println(o.getClass().getName());
         Object o2 = context.getBean(MapUtil.class);
@@ -42,6 +45,7 @@ public class SellApplicationTests {
 
     /**
      * 测试数据源
+     *
      * @throws SQLException
      */
     @Test
@@ -51,5 +55,10 @@ public class SellApplicationTests {
         System.out.println(dataSource.toString());
     }
 
+    @Test
+    public void generateId() {
+        System.out.println(UUID.randomUUID());
+        System.out.println(BigInteger.ZERO);
+    }
 
 }

@@ -21,10 +21,14 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class CartDTO {
 
-    /** 商品Id. */
+    /**
+     * 商品Id.
+     */
     private String productId;
 
-    /** 数量. */
+    /**
+     * 数量.
+     */
     private Integer productQuantity;
 
 }

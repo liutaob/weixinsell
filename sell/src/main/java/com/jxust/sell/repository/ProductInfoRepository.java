@@ -22,6 +22,9 @@ import java.util.Map;
  */
 public interface ProductInfoRepository extends JpaRepository<ProductInfo, String> {
 
+    //默认findOne参数复杂、findById需OrElse     自定义默认方法/自定义JPQL
+    ProductInfo findProductInfoByProductId(String productId);
+
     List<ProductInfo> findByProductStatus(Integer productStatus);
 
     //根据id批量查询
@@ -60,7 +63,7 @@ public interface ProductInfoRepository extends JpaRepository<ProductInfo, String
             ":#{#proInfo.productIcon}," +
             ":#{#proInfo.categoryType})", nativeQuery = true)
     @Modifying
-    void insertProduct(@Param("proInfo") ProductInfo productInfo);
+    int insertProduct(@Param("proInfo") ProductInfo productInfo);
 
     //参数为对象的插入商品    注意:JPQL只支持本地sql Insert操作，实体不支持  不封装参数插入 不推荐
     @Query(value = "insert into product_info(" +
@@ -77,17 +80,17 @@ public interface ProductInfoRepository extends JpaRepository<ProductInfo, String
     void insertProductByString(String productId, String productName, BigDecimal productPrice, Integer productStock,
                                String productDescription, String productIcon, Integer categoryType);
 
-    //参数为对象的插入商品    注意:JPQL只支持本地sql Insert操作，实体不支持  不封装参数插入 不推荐
+    //参数为map 亲测不可以
     @Query(value = "insert into product_info(" +
             "product_id,product_name,product_price,product_stock,product_description,product_icon,category_type" +
             ") VALUES(" +
-            ":{productId}," +
-            ":{productName}," +
-            ":{productPrice}," +
-            ":{productStock}," +
-            ":{productDescription}," +
-            ":{productIcon}," +
-            ":{categoryType}", nativeQuery = true)
+            ":#{#map.get('productId')}," +
+            ":#{#map.get('productName')}," +
+            ":#{#map.get('productPrice')}," +
+            ":#{#map.get('productStock')}," +
+            ":#{#map.get('productDescription')}," +
+            ":#{#map.get('productIcon')}," +
+            ":#{#map.get('categoryType')}", nativeQuery = true)
 //    @Query(value = "insert into product_info(" +
 //            "product_id,product_name,product_price,product_stock,product_description,product_icon,category_type" +
 //            ") VALUES(" +
@@ -99,12 +102,16 @@ public interface ProductInfoRepository extends JpaRepository<ProductInfo, String
 //            ":#{#maputil.arg2Type(:#map.get('productIcon'))}," +
 //            ":#{#maputil.arg2Type(:#map.get('categoryType'))}", nativeQuery = true)
     @Modifying
-    int insertProductByMap(Map map);
+    @Deprecated
+//此方法暂未开通
+    int insertProductByMap(@Param("map") Map map);
 
 
     //使用JPQL的本地sql自定插入
+    @Query(value = "DELETE FROM product_info", nativeQuery = true)
 //    @Query(value = "DELETE FROM product_info WHERE product_id = ?1", nativeQuery = true)
-    @Query(value = "DELETE FROM ProductInfo  p WHERE productId = ?1")
+//    @Query(value = "DELETE FROM ProductInfo  p WHERE productId > ?1")
+//    @Query(value = "DELETE FROM ProductInfo  p WHERE productId = ?1")
     @Modifying
 //删改需要加上该注解
     //需要在service内加事务，repository默认只有只读事务

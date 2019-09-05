@@ -51,16 +51,15 @@ public class ProductCategory {
      * 创建时间.
      */
 //    private Date createTime;
-//
-//    /**
-//     * 更新时间(mysql5.7以上支持自动更新).
-//     */
+
+    /**
+     * 更新时间(mysql5.7以上支持自动更新).
+     */
 //    private Date updateTime;
 
     //Spring底层创建bean
 //    public ProductCategory() {
 //    }
-
     public ProductCategory(String categoryName, Integer categoryType) {
         this.categoryName = categoryName;
         this.categoryType = categoryType;

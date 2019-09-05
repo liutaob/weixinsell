@@ -7,7 +7,7 @@ package com.jxust.sell.util;
 import java.util.Random;
 
 /**
- * 主键生成工具
+ * 主键生成工具 时间戳+随机数
  *
  * @author <a href="mailto:maxid@qq.com">LiuTao</a>
  * @since $$Id$$

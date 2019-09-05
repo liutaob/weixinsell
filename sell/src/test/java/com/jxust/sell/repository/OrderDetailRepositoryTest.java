@@ -21,6 +21,7 @@ public class OrderDetailRepositoryTest {
     @Autowired
     private OrderDetailRepository repository;
 
+    //订单项插入
     @Test
     public void saveTest() throws Exception {
         OrderDetail orderDetail = new OrderDetail();
@@ -36,6 +37,7 @@ public class OrderDetailRepositoryTest {
         Assert.assertNotNull(result);
     }
 
+    //根据订单id查找订单项
     @Test
     public void findByOrderId() throws Exception {
         List<OrderDetail> orderDetailList = repository.findByOrderId("1234569");

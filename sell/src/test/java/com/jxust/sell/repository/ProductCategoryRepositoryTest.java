@@ -24,6 +24,7 @@ public class ProductCategoryRepositoryTest {
     @Autowired
     private ProductCategoryRepository repository;
 
+    //查询所有商品类目
     @Test
     public void findListTest() {
         List<ProductCategory> list = repository.findAll();
@@ -31,6 +32,7 @@ public class ProductCategoryRepositoryTest {
         list.forEach(System.out::println);
     }
 
+    //插入商品类目
     @Test
 //    @Transactional//测试中完全回滚
     @org.springframework.transaction.annotation.Transactional
@@ -42,16 +44,18 @@ public class ProductCategoryRepositoryTest {
         Assert.assertNotEquals(null, result);
     }
 
+    //根据商品类型批量查找商品类目
     @Test
-    public void findByCategoryTypeIn(){
+    public void findByCategoryTypeIn() {
         ArrayList<Integer> list = Lists.newArrayList(2, 3, 4);
         List<Integer> list1 = Arrays.asList(2, 10);
         List<ProductCategory> result = repository.findByCategoryTypeIn(list1);
         Assert.assertNotNull(result);
     }
 
+    //根据类目Id测试findOne、findById
     @Test
-    public void findByCategoryId(){
+    public void findByCategoryId() {
         Optional<ProductCategory> optional = repository.findById(1);
         ProductCategory productCategory3 = optional.orElse(null);
         ProductCategory productCategory = optional.get();
@@ -59,7 +63,7 @@ public class ProductCategoryRepositoryTest {
         //使用findById替代findOne，不存在会报NoSuchElementExcpetion
         Optional<ProductCategory> optional2 = repository.findById(99);
         ProductCategory productCategory1 = optional2.orElse(null);
-        ProductCategory productCategory2 = productCategory1!=null?optional2.get():null;
+        ProductCategory productCategory2 = productCategory1 != null ? optional2.get() : null;
 
         //findOne方式，结合匹配器 类比逆向工程
         //参考https://docs.spring.io/spring-data/jpa/docs/2.1.10.RELEASE/reference/html/ 5.6.4

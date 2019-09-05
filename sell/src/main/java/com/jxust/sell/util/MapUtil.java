@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 /**
- * 插入商品Map作参数 工具类
+ * 插入商品Map作参数 工具类 处理SPLE表达式
  *
  * @author <a href="mailto:maxid@qq.com">LiuTao</a>
  * @since $$Id$$

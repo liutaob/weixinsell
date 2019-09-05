@@ -1,6 +1,7 @@
 package com.jxust.sell.repository;
 
 import com.jxust.sell.entity.OrderMaster;
+import com.jxust.sell.enums.PayStatusEnum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,8 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-
-import static org.junit.Assert.*;
 
 /**
  * OrderMasterRepository Dao接口测试
@@ -25,6 +24,7 @@ public class OrderMasterRepositoryTest {
 
     private final String OPENID = "2441603211";
 
+    //创建订单
     @Test
     public void saveTest() {
         OrderMaster orderMaster = new OrderMaster();
@@ -39,15 +39,17 @@ public class OrderMasterRepositoryTest {
         Assert.assertNotNull(result);
     }
 
+    //更新订单状态
     @Test
-    public void updateTest(){
-        OrderMaster orderMaster = repository.findById("1234569").get();
-        orderMaster.setPayStatus(1);
+    public void updateTest() {
+        OrderMaster orderMaster = repository.findById("1234569").orElse(null);
+        Assert.assertNotNull(orderMaster);
+        orderMaster.setPayStatus(PayStatusEnum.SUCCESS.getCode());
         OrderMaster result = repository.save(orderMaster);
-        Assert.assertNotEquals((Integer)0,result.getPayStatus());
-
+        Assert.assertNotEquals((Integer) 0, result.getPayStatus());
     }
 
+    //根据买家微信Openid查找所属订单
     @Test
     public void findByBuyerOpenid() throws Exception {
         PageRequest request = new PageRequest(2, 3);

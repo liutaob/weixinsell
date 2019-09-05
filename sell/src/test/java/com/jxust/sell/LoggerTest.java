@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * 一句简洁的说明
+ * 测试日志，并完成日志的归档
  *
  * @author <a href="mailto:maxid@qq.com">LiuTao</a>
  * @since $$Id$$
