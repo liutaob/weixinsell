@@ -84,6 +84,7 @@ public class OrderDTO {
     private Date updateTime;
 
     List<OrderDetail> orderDetailList;
+//    List<OrderDetail> orderDetailList = new ArrayList<>();
 
     /**
      * 忽略json字段.

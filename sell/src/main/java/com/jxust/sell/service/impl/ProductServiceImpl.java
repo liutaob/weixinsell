@@ -155,6 +155,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public void decreaseStock(List<CartDTO> cartDTOList) {
+        //TODO redis锁机制避免问题
         for (CartDTO cartDTO : cartDTOList) {
             ProductInfo productInfo = this.findOne(cartDTO.getProductId());
             if (productInfo == null) {

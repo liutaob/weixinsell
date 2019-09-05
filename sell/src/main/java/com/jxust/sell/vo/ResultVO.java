@@ -32,6 +32,7 @@ public class ResultVO<T> implements Serializable {
     /**
      * 提示信息.
      */
+//    private String msg = "";
     private String msg;
 
     /**

@@ -30,13 +30,13 @@ public class OrderServiceImplTest {
 
     private final String BUYER_OPENID = "18707956960";
 
-    private final String ORDER_ID = "1567678000966590839";
+    private final String ORDER_ID = "1567695338315240020";
 
     @Test
     public void create() throws Exception {
 
         OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setBuyerName("liujian");
+        orderDTO.setBuyerName("liutao");
         orderDTO.setBuyerAddress("jxwz");
         //TODO 为空验证、正则验证应在前台判断  安全性、是否重复可在后台判断
         orderDTO.setBuyerPhone("15079525214");

@@ -95,7 +95,7 @@ public class OrderServiceImpl implements OrderService {
         OrderMaster orderMaster = new OrderMaster();
         // 将订单传输对象转化为主订单对象
         orderDTO.setOrderId(orderId);// 设置开头产生的订单id
-        BeanUtils.copyProperties(orderDTO, orderMaster);
+        BeanUtils.copyProperties(orderDTO, orderMaster);//注意属性的覆盖顺序
         // 设置金额、订单状态、支付状态
         orderMaster.setOrderAmount(orderAmount);
         orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
@@ -159,7 +159,7 @@ public class OrderServiceImpl implements OrderService {
 
         // 修改订单状态
         orderDTO.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
-        BeanUtils.copyProperties(orderDTO, orderMaster);
+        BeanUtils.copyProperties(orderDTO, orderMaster);//注意顺序，属性覆盖问题
         OrderMaster updateResult = orderMasterRepository.save(orderMaster);
         if (updateResult == null) {
             log.error("【取消订单】更新失败, orderMaster={}", orderMaster);
@@ -196,6 +196,8 @@ public class OrderServiceImpl implements OrderService {
 
         // 修改订单状态
         orderDTO.setOrderStatus(OrderStatusEnum.FINISHED.getCode());
+
+        //TODO 完结订单 支付状态不应该完成吗
         OrderMaster orderMaster = new OrderMaster();
         //DTO转实体再操作
         BeanUtils.copyProperties(orderDTO, orderMaster);
@@ -228,10 +230,8 @@ public class OrderServiceImpl implements OrderService {
             throw new SellException(ResultEnum.ORDER_PAY_STATUS_ERROR);
         }
 
-        // 修改支付状态
+        // 修改支付状态   已支付不代表订单完成 还可退款
         orderDTO.setPayStatus(PayStatusEnum.SUCCESS.getCode());
-        //TODO 已支付说明订单完成？ 暂定
-        orderDTO.setOrderStatus(OrderStatusEnum.FINISHED.getCode());
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDTO, orderMaster);
         OrderMaster updateResult = orderMasterRepository.save(orderMaster);

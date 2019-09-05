@@ -53,6 +53,9 @@ spring:
   redis:
     host: 49.235.79.220
     password: 123456
+  #json全局处理
+  jackson:
+    default-property-inclusion: non_null
 
 server:
   servlet:

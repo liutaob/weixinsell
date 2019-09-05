@@ -15,7 +15,7 @@ import java.util.Random;
 public class KeyUtil {
 
     /**
-     * 生成唯一的主键 格式: 时间+随机数
+     * 生成唯一的主键 格式: 时间+随机数   synchronized多线程同步处理
      *
      * @return String
      */
